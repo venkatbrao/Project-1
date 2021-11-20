@@ -8,21 +8,21 @@ These documents have been tried and used to create a live DVWA and ELK arrangeme
 
 Rundown of playbook files and configuration files expected to make it work:
 
-[Ansible configuration]()
+ - Ansible configuration
 
-[Ansible Hosts]()
+- Ansible Hosts]
 
-[DVWA Playbook Install]()
+- DVWA Playbook Install
 
-[ELK Install Playbook]()
+- ELK Install Playbook]
 
-[Filebeat Configuration]()
+- Filebeat Configuration
 
-[Metricbeat Configuration]()
+- Metricbeat Configuration
 
-[Filebeat playbook]()
+- Filebeat playbook
 
-[Metricbeat Playbook]()
+- Metricbeat Playbook
 
 This document contains the following details:
 
@@ -130,6 +130,49 @@ The DVWA installation playbook implements the following tasks:
 As you can see in the below screenshot, the first four lines are important. This will make Ansible know where and what group of servers you want to install and execute the commands for this playbook. As depicted below the first thing that needs to be installed is the docker.io to the DVWA web servers VM.
 
 ![](https://drive.google.com/file/d/1fFVUGMrS1QXBb_pKXGhyVNsZv5eBu9Vh/view?usp=sharing)
+
+- The 2nd part of the of the installation is to install the phython3-pip. Pip is the standard package manager for Python. It allows you to install and manage additional packages that are not part of the Python standard library.
+
+- The 3rd part of the installation is to install the docker module
+- After executing the previous task then you can execute below command to download and lunch the DVWA docker container.
+- This last part of the playbook is optional but nice to have. This particular task is to automatically start the Ansible docker service if you reboot your VM.
+- Below screenshot is the command to use to run the DVWA playbook and what it looks like when executed. If you see red notes it means something is not right and need to correct it. "Ok" message is a good indicator that it is successful.
+
+## ELK Configuration
+The ELK installation playbook implements the following tasks:
+
+- As you can see in the below screenshot, it has the same format of commands in the DVWA playbook. You need the difference in the hosts name. Same thing Ansible need to know where and what group of servers you want to install and execute the commands for this playbook. As depicted below the first thing that needs to be installed is the docker.io to the ELK VM.
+- Same as the DVWA, the 2nd part of the of the installation is to install the phython3-pip.
+- The 3rd part of the installation is same as DVWA installing the docker module
+- The 4th part is also very important. ELK needs an ample amount of memory. When you setup your VM it requires minimum of 4GB system memory or else ELK will not run due to lack of system resource. Below screenshot are commands that will assign enough memory for the ELK to function properly
+- After executing the previous task you can now download and lunch the ELK docker container. You have to specify the ports that ELK use and the port you will be using to access the ELK in the web. In my case here I use the port 5601
+- Same thing as the DVWA, last part of the playbook is optional but nice to have. This command will automatically start the Ansible docker service if you reboot your VM
+
+## Target Machines & Beats
+This ELK server is configured to monitor the following machines:
+
+- Web 1 - 10.1.0.5
+- Web 2 - 10.1.0.6
+- Web 3 - 10.1.0.7
+After successfully running this playbook you now have installed the Filebeats and Metricbeats on your machines.
+
+- Filebeats and Metricbeats are now installed to all web servers using the ELK Install playbook. As you can see it seamlessly installed the beats in the three web servers in just one shot.
+- What are these Beats for? This will allow us to collect information from each machine that we want to try to monitor and record logs. Below are the screenshot and explain what are the main usage and what is used for.
+
+- Filebeat is a lightweight shipper for forwarding and centralizing log data. Installed as an agent on your servers, Filebeat monitors the log files or locations that you specify, collects log events such as apache logs, website logs, system logs etc. This forwards them either to Elasticsearch or Logstash for indexing. Below is a sample screenshot of Filebeat.
+- Metricbeat is a lightweight shipper that you can install on your servers to periodically collect metrics from the operating system and from services running on the server. Metricbeat takes the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch or Logstash. It periodically collects metric data from your target servers, this could be operating system metrics such as CPU or memory or data related to services running on the server. It can also be used to monitor other beats and ELK stack itself. Below is a sample screenshot of Metricbea
+
+- Note: In case DVWA ask you for a username and password just type admin as the user and password as the credentials
+
+Using the Playbook
+In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned:
+
+SSH into the control node and follow the steps below:
+
+Copy the Filebeat (Filebeat-Playbook.yml) and Metricbeat (Metricbeat-Playbook.yml) playbook files to your /etc/ansible directory. To make it manageable I created a subdirectory "roles" and made it as my repository of playbooks.
+
+Make sure to update the Filebeat (filebeat-config.yml) and Metricbeat (metricbeat-config.yml) configuration files. You need to edit to indicate what specific machine you want to host the Filebeat and Metricbeat app. This configuration files will be copied to the proper Filebeat and Metricbeat folders once you execute their respective playbooks. In my case I created a subdirectory folder named "files" as a repository for my configuration files. Below are the entries that you need to modify on both configuration files before you execute their respective playbook.
+
 
 
 
