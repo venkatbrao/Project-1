@@ -119,7 +119,6 @@ First is the hosts file and as you can see I added my VMs.
 
 
 And the second one is the ansible.cfg file. As you can see here you need to put your VM username
-
 ![ansible](https://drive.google.com/file/d/1bJNszM1MoprJOQLBh0yY1SLQK8p6XFGM/view?usp=sharing)
 
 Then it is done. You can now proceed to the DVWA & ELK configuration.
