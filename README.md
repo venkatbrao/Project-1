@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-## DVWA and ELK deployment through Azure VM Based Project
-=======
+
 # DVWA and ELK deployment through Azure VM Based Project
->>>>>>> 47440f837eeb51c36c9fc7c866442dccd2ec7d68
+
 This specific vault will tell you the best way to make a protected and simple arrangement of DVWA and ELK that can be utilized by Cybersecurity understudies and experts
 
 **DVWA & ELK Deployment**
@@ -177,8 +175,6 @@ SSH into the control node and follow the steps below:
 Copy the Filebeat (Filebeat-Playbook.yml) and Metricbeat (Metricbeat-Playbook.yml) playbook files to your /etc/ansible directory. To make it manageable I created a subdirectory "roles" and made it as my repository of playbooks.
 
 Make sure to update the Filebeat (filebeat-config.yml) and Metricbeat (metricbeat-config.yml) configuration files. You need to edit to indicate what specific machine you want to host the Filebeat and Metricbeat app. This configuration files will be copied to the proper Filebeat and Metricbeat folders once you execute their respective playbooks. In my case I created a subdirectory folder named "files" as a repository for my configuration files. Below are the entries that you need to modify on both configuration files before you execute their respective playbook.
-<<<<<<< HEAD
-=======
 
 
 
@@ -196,9 +192,6 @@ Make sure to update the Filebeat (filebeat-config.yml) and Metricbeat (metricbea
 
 
 
-
-
- 
 
 
 
@@ -206,4 +199,8 @@ Make sure to update the Filebeat (filebeat-config.yml) and Metricbeat (metricbea
 
 
 
->>>>>>> 47440f837eeb51c36c9fc7c866442dccd2ec7d68
+ 
+
+
+
+
